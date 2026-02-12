@@ -1,0 +1,16 @@
+﻿@model Proyecto_Restaurante.Models.Restaurante
+
+<h2>Eliminar Restaurante</h2>
+
+<p>¿Está seguro que desea eliminar este restaurante?</p>
+
+<ul>
+    <li><strong>Nombre:</strong> @Model.Nombre</li>
+    <li><strong>Tipo:</strong> @Model.TipoCocina</li>
+</ul>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="RestauranteId" />
+    <button type="submit">Eliminar</button>
+    <a asp-action="Index">Cancelar</a>
+</form>

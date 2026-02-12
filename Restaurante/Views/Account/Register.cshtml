@@ -1,0 +1,19 @@
+﻿@model Proyecto_Restaurante.ViewModels.RegisterViewModel
+
+<form asp-action="Register" method="post">
+    <input asp-for="Nombre" placeholder="Nombre" />
+    <br />
+    <input asp-for="Correo" type="email" placeholder="Correo" />
+    <br />
+    <input asp-for="Password" type="password" placeholder="Contraseña" />
+    <br />
+    <input asp-for="Captcha" placeholder="5 + 3 ?" />
+    <br />
+    <button type="submit">Registrarse</button>
+    <p>
+        ¿Ya tienes una cuenta?
+        <a asp-controller="Account" asp-action="Login">
+            Ingresar aquí
+        </a>
+    </p>
+</form>
