@@ -50,7 +50,7 @@ namespace Proyecto_Restaurante.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
-            if (model.Captcha != "8")
+            if (model.Captcha != "7")
             {
                 ModelState.AddModelError("", "Captcha incorrecto");
                 return View(model);
