@@ -29,6 +29,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Restaurantes" asp-action="Index">Restaurantes</a>
                         </li>
+                        @{
+                            var rol = Context.Session.GetString("Rol");
+                        }
+
+                        @if (rol == "Administrador")
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Roles" asp-action="Index">
+                                    Mantenimiento de Roles
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
