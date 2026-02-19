@@ -1,0 +1,227 @@
+﻿@* ════════════════════════════════════════════════════
+   Views/Platillos/Detalle.cshtml
+   ════════════════════════════════════════════════════ *@
+@model Proyecto_Restaurante.Models.Platillo
+@{
+    ViewData["Title"] = "Detalle del Platillo";
+}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="@Model.ImagenUrl" class="img-fluid rounded" alt="@Model.Nombre"
+                 style="width:100%;height:400px;object-fit:cover">
+        </div>
+        <div class="col-md-6">
+            <h1>@Model.Nombre</h1>
+            <span class="badge bg-secondary mb-3">@Model.Categoria</span>
+            <h3 class="text-success mb-4">$@Model.Precio.ToString("N2")</h3>
+            <h5>Descripción</h5>
+            <p class="lead">@Model.Descripcion</p>
+            <p><strong>Restaurante:</strong> @Model.Restaurante?.Nombre</p>
+            <hr>
+            <div class="d-flex gap-2 mt-4">
+                <form asp-action="AgregarAlCarrito" method="post" class="flex-fill">
+                    <input type="hidden" name="id" value="@Model.PlatilloId" />
+                    <button type="submit" class="btn btn-success btn-lg w-100">➕ Agregar al Carrito</button>
+                </form>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">← Volver</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@* ════════════════════════════════════════════════════
+   Views/Platillos/Create.cshtml
+   ════════════════════════════════════════════════════ *@
+@*
+@model Proyecto_Restaurante.Models.Platillo
+@{
+    ViewData["Title"] = "Nuevo Platillo";
+}
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <form asp-action="Create" method="post">
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <input asp-for="Descripcion" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Precio</label>
+            <input asp-for="Precio" type="number" step="0.01" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <input asp-for="Categoria" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">URL de imagen</label>
+            <input asp-for="ImagenUrl" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Restaurante</label>
+            <select asp-for="RestauranteId" class="form-select"
+                    asp-items="@(new SelectList(ViewBag.Restaurantes, "RestauranteId", "Nombre"))">
+                <option value="">-- Seleccionar --</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+*@
+
+
+@* ════════════════════════════════════════════════════
+   Views/Platillos/Edit.cshtml
+   ════════════════════════════════════════════════════ *@
+@*
+@model Proyecto_Restaurante.Models.Platillo
+@{
+    ViewData["Title"] = "Editar Platillo";
+}
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="PlatilloId" />
+        <div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input asp-for="Nombre" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Descripción</label>
+            <input asp-for="Descripcion" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Precio</label>
+            <input asp-for="Precio" type="number" step="0.01" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Categoría</label>
+            <input asp-for="Categoria" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">URL de imagen</label>
+            <input asp-for="ImagenUrl" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Restaurante</label>
+            <select asp-for="RestauranteId" class="form-select"
+                    asp-items="@(new SelectList(ViewBag.Restaurantes, "RestauranteId", "Nombre"))">
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+*@
+
+
+@* ════════════════════════════════════════════════════
+   Views/Platillos/Delete.cshtml
+   ════════════════════════════════════════════════════ *@
+@*
+@model Proyecto_Restaurante.Models.Platillo
+@{
+    ViewData["Title"] = "Eliminar Platillo";
+}
+<div class="container mt-4">
+    <h2>@ViewData["Title"]</h2>
+    <p>¿Está seguro que desea eliminar este platillo?</p>
+    <ul>
+        <li><strong>Nombre:</strong> @Model.Nombre</li>
+        <li><strong>Categoría:</strong> @Model.Categoria</li>
+        <li><strong>Precio:</strong> $@Model.Precio.ToString("N2")</li>
+    </ul>
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="PlatilloId" />
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+*@
+
+
+@* ════════════════════════════════════════════════════
+   Views/Platillos/Carrito.cshtml
+   ════════════════════════════════════════════════════ *@
+@*
+@model List<Proyecto_Restaurante.Models.CarritoItem>
+@{
+    ViewData["Title"] = "Carrito de Compras";
+}
+<div class="container mt-4">
+    <h1 class="mb-4">🛒 @ViewData["Title"]</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-warning">
+            <h4>Tu carrito está vacío</h4>
+            <a asp-action="Index" class="btn btn-primary">Ver Menú</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Platillo</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Platillo.ImagenUrl" alt="@item.Platillo.Nombre"
+                                     style="width:80px;height:80px;object-fit:cover" class="rounded">
+                            </td>
+                            <td class="align-middle">
+                                <strong>@item.Platillo.Nombre</strong><br>
+                                <small class="text-muted">@item.Platillo.Categoria</small>
+                            </td>
+                            <td class="align-middle">$@item.Platillo.Precio.ToString("N2")</td>
+                            <td class="align-middle">@item.Cantidad</td>
+                            <td class="align-middle"><strong>$@item.Subtotal.ToString("N2")</strong></td>
+                            <td class="align-middle">
+                                <form asp-action="EliminarDelCarrito" method="post">
+                                    <input type="hidden" name="id" value="@item.Platillo.PlatilloId" />
+                                    <button type="submit" class="btn btn-danger btn-sm">🗑️ Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="table-light">
+                        <td colspan="4" class="text-end"><h4>Total:</h4></td>
+                        <td colspan="2"><h4 class="text-success">$@ViewBag.Total.ToString("N2")</h4></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">← Seguir Comprando</a>
+            <button class="btn btn-success btn-lg">💳 Proceder al Pago</button>
+        </div>
+    }
+</div>
+*@

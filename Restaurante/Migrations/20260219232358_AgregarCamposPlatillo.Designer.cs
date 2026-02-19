@@ -11,8 +11,8 @@ using Proyecto_Restaurante.Data;
 namespace Proyecto_Restaurante.Migrations
 {
     [DbContext(typeof(RestauranteDbContext))]
-    [Migration("20260208123351_Catalogos")]
-    partial class Catalogos
+    [Migration("20260219232358_AgregarCamposPlatillo")]
+    partial class AgregarCamposPlatillo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,15 @@ namespace Proyecto_Restaurante.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatilloId"));
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagenUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

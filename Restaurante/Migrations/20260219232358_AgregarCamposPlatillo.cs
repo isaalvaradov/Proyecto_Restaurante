@@ -5,7 +5,7 @@
 namespace Proyecto_Restaurante.Migrations
 {
     /// <inheritdoc />
-    public partial class Catalogos : Migration
+    public partial class AgregarCamposPlatillo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -50,6 +50,8 @@ namespace Proyecto_Restaurante.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descripcion = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ImagenUrl = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Categoria = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RestauranteId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

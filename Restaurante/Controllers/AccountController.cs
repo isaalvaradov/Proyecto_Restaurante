@@ -16,6 +16,10 @@ namespace Proyecto_Restaurante.Controllers
 
         public IActionResult Login()
         {
+            // Si ya hay sesión activa, redirigir al menú
+            if (HttpContext.Session.GetString("Usuario") != null)
+                return RedirectToAction("Index", "Platillos");
+
             return View();
         }
 
@@ -39,7 +43,7 @@ namespace Proyecto_Restaurante.Controllers
             HttpContext.Session.SetString("Rol", usuario.Rol);
             HttpContext.Session.SetString("Usuario", usuario.Correo);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Platillos");
         }
 
         public IActionResult Register()
@@ -65,7 +69,12 @@ namespace Proyecto_Restaurante.Controllers
             };
 
             _authService.Register(usuario);
+            return RedirectToAction("Login");
+        }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
     }

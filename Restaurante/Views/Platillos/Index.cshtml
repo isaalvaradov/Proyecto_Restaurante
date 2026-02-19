@@ -1,0 +1,57 @@
+﻿@model List<Proyecto_Restaurante.Models.Platillo>
+@{
+    ViewData["Title"] = "Menú del Restaurante";
+    var rol = Context.Session.GetString("Rol");
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">@ViewData["Title"]</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        @foreach (var p in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(p.ImagenUrl))
+                    {
+                        <img src="@p.ImagenUrl" class="card-img-top" alt="@p.Nombre"
+                             style="height:200px;object-fit:cover">
+                    }
+                    <div class="card-body d-flex flex-column">
+                        <span class="badge bg-secondary mb-2 align-self-start">@p.Categoria</span>
+                        <h5 class="card-title">@p.Nombre</h5>
+                        <p class="card-text">@p.Descripcion</p>
+                        <div class="mt-auto">
+                            <h4 class="text-success">₡@p.Precio.ToString("N0")</h4>
+                            <div class="d-flex gap-2">
+                                <a asp-action="Detalle" asp-route-id="@p.PlatilloId"
+                                   class="btn btn-outline-primary flex-fill">Ver Detalle</a>
+                                <form asp-action="AgregarAlCarrito" method="post" class="flex-fill">
+                                    <input type="hidden" name="id" value="@p.PlatilloId" />
+                                    <button type="submit" class="btn btn-success w-100">➕ Agregar</button>
+                                </form>
+                            </div>
+                            @if (rol == "Administrador")
+                            {
+                                <div class="d-flex gap-2 mt-2">
+                                    <a asp-action="Edit" asp-route-id="@p.PlatilloId"
+                                       class="btn btn-sm btn-warning flex-fill">Editar</a>
+                                    <a asp-action="Delete" asp-route-id="@p.PlatilloId"
+                                       class="btn btn-sm btn-danger flex-fill">Eliminar</a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

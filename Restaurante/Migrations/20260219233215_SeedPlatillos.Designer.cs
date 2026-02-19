@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proyecto_Restaurante.Data;
 
@@ -10,9 +11,11 @@ using Proyecto_Restaurante.Data;
 namespace Proyecto_Restaurante.Migrations
 {
     [DbContext(typeof(RestauranteDbContext))]
-    partial class RestauranteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260219233215_SeedPlatillos")]
+    partial class SeedPlatillos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,7 +49,6 @@ namespace Proyecto_Restaurante.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Precio")
-                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RestauranteId")
@@ -66,7 +68,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "Pizza tradicional con tomate, mozzarella y albahaca",
                             ImagenUrl = "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
                             Nombre = "Pizza Margarita",
-                            Precio = 6500m,
+                            Precio = 120.00m,
                             RestauranteId = 1
                         },
                         new
@@ -76,7 +78,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "Carne de res, lechuga, tomate, cebolla y queso cheddar",
                             ImagenUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
                             Nombre = "Hamburguesa Clásica",
-                            Precio = 5200m,
+                            Precio = 95.00m,
                             RestauranteId = 1
                         },
                         new
@@ -86,7 +88,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "Lechuga romana, aderezo césar, crutones y parmesano",
                             ImagenUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400",
                             Nombre = "Ensalada César",
-                            Precio = 4800m,
+                            Precio = 80.00m,
                             RestauranteId = 1
                         },
                         new
@@ -96,7 +98,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "Fettuccine en salsa cremosa de queso parmesano",
                             ImagenUrl = "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400",
                             Nombre = "Pasta Alfredo",
-                            Precio = 5800m,
+                            Precio = 110.00m,
                             RestauranteId = 1
                         },
                         new
@@ -106,7 +108,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "3 tacos con carne al pastor, piña, cilantro y cebolla",
                             ImagenUrl = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
                             Nombre = "Tacos al Pastor",
-                            Precio = 4200m,
+                            Precio = 75.00m,
                             RestauranteId = 1
                         },
                         new
@@ -116,7 +118,7 @@ namespace Proyecto_Restaurante.Migrations
                             Descripcion = "8 piezas de california roll con aguacate y surimi",
                             ImagenUrl = "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400",
                             Nombre = "Sushi Roll",
-                            Precio = 7500m,
+                            Precio = 130.00m,
                             RestauranteId = 1
                         });
                 });

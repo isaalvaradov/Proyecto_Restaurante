@@ -1,0 +1,78 @@
+﻿@model List<Proyecto_Restaurante.Models.CarritoItem>
+@{
+    ViewData["Title"] = "Carrito de Compras";
+    decimal total = (decimal)ViewBag.Total;
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">🛒 @ViewData["Title"]</h1>
+
+    @if (TempData["Mensaje"] != null)
+    {
+        <div class="alert alert-info alert-dismissible fade show">
+            @TempData["Mensaje"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-warning">
+            <h4>Tu carrito está vacío</h4>
+            <p>Agrega platillos desde nuestro menú</p>
+            <a asp-action="Index" class="btn btn-primary">Ver Menú</a>
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Platillo</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="@item.Platillo.ImagenUrl" alt="@item.Platillo.Nombre"
+                                     style="width:80px;height:80px;object-fit:cover" class="rounded">
+                            </td>
+                            <td class="align-middle">
+                                <strong>@item.Platillo.Nombre</strong><br>
+                                <small class="text-muted">@item.Platillo.Categoria</small>
+                            </td>
+                            <td class="align-middle">₡@item.Platillo.Precio.ToString("N0")</td>
+                            <td class="align-middle">@item.Cantidad</td>
+                            <td class="align-middle"><strong>₡@item.Subtotal.ToString("N0")</strong></td>
+                            <td class="align-middle">
+                                <form asp-action="EliminarDelCarrito" method="post">
+                                    <input type="hidden" name="id" value="@item.Platillo.PlatilloId" />
+                                    <button type="submit" class="btn btn-danger btn-sm">🗑️ Eliminar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="table-light">
+                        <td colspan="4" class="text-end"><h4>Total:</h4></td>
+                        <td colspan="2"><h4 class="text-success">₡@total.ToString("N0")</h4></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a asp-action="Index" class="btn btn-outline-secondary btn-lg">← Seguir Comprando</a>
+            <button class="btn btn-success btn-lg">💳 Proceder al Pago</button>
+        </div>
+    }
+</div>

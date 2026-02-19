@@ -11,8 +11,8 @@ using Proyecto_Restaurante.Data;
 namespace Proyecto_Restaurante.Migrations
 {
     [DbContext(typeof(RestauranteDbContext))]
-    [Migration("20260211011017_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260219233531_PreciosColones")]
+    partial class PreciosColones
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,7 +32,15 @@ namespace Proyecto_Restaurante.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlatilloId"));
 
+                    b.Property<string>("Categoria")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImagenUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -41,6 +49,7 @@ namespace Proyecto_Restaurante.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Precio")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("RestauranteId")
@@ -51,6 +60,68 @@ namespace Proyecto_Restaurante.Migrations
                     b.HasIndex("RestauranteId");
 
                     b.ToTable("Platillos");
+
+                    b.HasData(
+                        new
+                        {
+                            PlatilloId = 1,
+                            Categoria = "Pizzas",
+                            Descripcion = "Pizza tradicional con tomate, mozzarella y albahaca",
+                            ImagenUrl = "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=400",
+                            Nombre = "Pizza Margarita",
+                            Precio = 6500m,
+                            RestauranteId = 1
+                        },
+                        new
+                        {
+                            PlatilloId = 2,
+                            Categoria = "Hamburguesas",
+                            Descripcion = "Carne de res, lechuga, tomate, cebolla y queso cheddar",
+                            ImagenUrl = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
+                            Nombre = "Hamburguesa Clásica",
+                            Precio = 5200m,
+                            RestauranteId = 1
+                        },
+                        new
+                        {
+                            PlatilloId = 3,
+                            Categoria = "Ensaladas",
+                            Descripcion = "Lechuga romana, aderezo césar, crutones y parmesano",
+                            ImagenUrl = "https://images.unsplash.com/photo-1546793665-c74683f339c1?w=400",
+                            Nombre = "Ensalada César",
+                            Precio = 4800m,
+                            RestauranteId = 1
+                        },
+                        new
+                        {
+                            PlatilloId = 4,
+                            Categoria = "Pastas",
+                            Descripcion = "Fettuccine en salsa cremosa de queso parmesano",
+                            ImagenUrl = "https://images.unsplash.com/photo-1645112411341-6c4fd023714a?w=400",
+                            Nombre = "Pasta Alfredo",
+                            Precio = 5800m,
+                            RestauranteId = 1
+                        },
+                        new
+                        {
+                            PlatilloId = 5,
+                            Categoria = "Mexicano",
+                            Descripcion = "3 tacos con carne al pastor, piña, cilantro y cebolla",
+                            ImagenUrl = "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=400",
+                            Nombre = "Tacos al Pastor",
+                            Precio = 4200m,
+                            RestauranteId = 1
+                        },
+                        new
+                        {
+                            PlatilloId = 6,
+                            Categoria = "Japonés",
+                            Descripcion = "8 piezas de california roll con aguacate y surimi",
+                            ImagenUrl = "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=400",
+                            Nombre = "Sushi Roll",
+                            Precio = 7500m,
+                            RestauranteId = 1
+                        });
                 });
 
             modelBuilder.Entity("Proyecto_Restaurante.Models.Restaurante", b =>
@@ -76,6 +147,15 @@ namespace Proyecto_Restaurante.Migrations
                     b.HasKey("RestauranteId");
 
                     b.ToTable("Restaurantes");
+
+                    b.HasData(
+                        new
+                        {
+                            RestauranteId = 1,
+                            Descripcion = "El mejor restaurante de la ciudad",
+                            Nombre = "Restaurante Central",
+                            TipoCocina = "Variada"
+                        });
                 });
 
             modelBuilder.Entity("Proyecto_Restaurante.Models.Usuario", b =>
