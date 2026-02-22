@@ -1,15 +1,29 @@
 ﻿@model List<Proyecto_Restaurante.Models.Restaurante>
 
+@{
+    ViewData["Title"] = "Restaurantes";
+}
+
 <h2>Restaurantes</h2>
 
-<a asp-action="Create">Nuevo Restaurante</a>
+@if (Context.Session.GetString("Rol") == "Administrador")
+{
+    <a asp-action="Create">Nuevo Restaurante</a>
+}
+
+<br />
+<br />
 
 <table border="1">
     <tr>
         <th>Nombre</th>
         <th>Tipo de cocina</th>
         <th>Descripción</th>
-        <th>Acciones</th>
+
+        @if (Context.Session.GetString("Rol") == "Administrador")
+        {
+            <th>Acciones</th>
+        }
     </tr>
 
     @foreach (var r in Model)
@@ -18,10 +32,14 @@
             <td>@r.Nombre</td>
             <td>@r.TipoCocina</td>
             <td>@r.Descripcion</td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@r.RestauranteId">Editar</a> |
-                <a asp-action="Delete" asp-route-id="@r.RestauranteId">Eliminar</a>
-            </td>
+
+            @if (Context.Session.GetString("Rol") == "Administrador")
+            {
+                <td>
+                    <a asp-action="Edit" asp-route-id="@r.RestauranteId">Editar</a> |
+                    <a asp-action="Delete" asp-route-id="@r.RestauranteId">Eliminar</a>
+                </td>
+            }
         </tr>
     }
 </table>
