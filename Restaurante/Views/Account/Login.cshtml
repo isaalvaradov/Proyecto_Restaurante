@@ -1,14 +1,58 @@
 ﻿@model Proyecto_Restaurante.ViewModels.LoginViewModel
 
+@{
+    ViewData["Title"] = "Iniciar Sesión";
+}
+
+<h2>Iniciar Sesión</h2>
+
+<div asp-validation-summary="All" style="color:red"></div>
+
 <form asp-action="Login" method="post">
-    <input asp-for="Correo" placeholder="Correo" />
-    <input asp-for="Password" type="password" placeholder="Contraseña" />
-    <input asp-for="Captcha" placeholder="2 + 3 ?" />
+
+    <div>
+        <label>Nombre</label><br />
+        <input asp-for="Nombre" class="form-control" placeholder="Ingrese su nombre" />
+        <span asp-validation-for="Nombre" style="color:red"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Correo</label><br />
+        <input asp-for="Correo" class="form-control" placeholder="Ingrese su correo" />
+        <span asp-validation-for="Correo" style="color:red"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Contraseña</label><br />
+        <input asp-for="Password" type="password" class="form-control" placeholder="Ingrese su contraseña" />
+        <span asp-validation-for="Password" style="color:red"></span>
+    </div>
+
+    <br />
+
+    <div>
+        <label>¿Cuánto es 2 + 3?</label><br />
+        <input asp-for="Captcha" class="form-control" placeholder="Respuesta" />
+        <span asp-validation-for="Captcha" style="color:red"></span>
+    </div>
+
+    <br />
+
     <button type="submit">Ingresar</button>
+
     <p>
         ¿No tienes cuenta?
         <a asp-controller="Account" asp-action="Register">
             Registrarse aquí
         </a>
     </p>
+
 </form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
