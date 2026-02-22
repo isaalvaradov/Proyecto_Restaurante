@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Proyecto_Restaurante.Models;
 using Proyecto_Restaurante.Services.Interfaces;
 using Proyecto_Restaurante.ViewModels;
@@ -14,6 +15,7 @@ namespace Proyecto_Restaurante.Controllers
             _authService = authService;
         }
 
+
         public IActionResult Login()
         {
             return View();
@@ -22,6 +24,10 @@ namespace Proyecto_Restaurante.Controllers
         [HttpPost]
         public IActionResult Login(LoginViewModel model)
         {
+
+            if (!ModelState.IsValid)
+                return View(model);
+
             if (model.Captcha != "5")
             {
                 ModelState.AddModelError("", "Captcha incorrecto");
@@ -36,11 +42,13 @@ namespace Proyecto_Restaurante.Controllers
                 return View(model);
             }
 
+
             HttpContext.Session.SetString("Rol", usuario.Rol);
             HttpContext.Session.SetString("Usuario", usuario.Correo);
 
             return RedirectToAction("Index", "Home");
         }
+
 
         public IActionResult Register()
         {
@@ -50,6 +58,10 @@ namespace Proyecto_Restaurante.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel model)
         {
+
+            if (!ModelState.IsValid)
+                return View(model);
+
             if (model.Captcha != "7")
             {
                 ModelState.AddModelError("", "Captcha incorrecto");
@@ -61,11 +73,18 @@ namespace Proyecto_Restaurante.Controllers
                 Nombre = model.Nombre,
                 Correo = model.Correo,
                 Password = model.Password,
-                Rol = "Comprador"
+                Rol = "Comprador" 
             };
 
             _authService.Register(usuario);
 
+            return RedirectToAction("Login");
+        }
+
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
     }
