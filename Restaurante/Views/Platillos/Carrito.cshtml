@@ -1,0 +1,62 @@
+@model List<Proyecto_Restaurante.Models.CarritoItem>
+
+@{
+    ViewData["Title"] = "Carrito de Compras";
+}
+
+<h2>Carrito de Compras</h2>
+
+@if (!Model.Any())
+{
+    <p>El carrito está vacío.</p>
+    <a asp-controller="Restaurantes" asp-action="Index" class="btn btn-primary">Ver Restaurantes</a>
+}
+else
+{
+    <table border="1" cellpadding="5" class="table">
+        <thead>
+            <tr>
+                <th>Imagen</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Precio Unitario</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImagenUrl))
+                        {
+                            <img src="@item.ImagenUrl" alt="@item.Nombre" style="width:80px; height:60px; object-fit:cover;" />
+                        }
+                    </td>
+                    <td>@item.Nombre</td>
+                    <td>@item.Descripcion</td>
+                    <td>₡@item.Precio.ToString("N2")</td>
+                    <td>@item.Cantidad</td>
+                    <td>₡@((item.Precio * item.Cantidad).ToString("N2"))</td>
+                    <td>
+                        <form asp-action="EliminarDelCarrito" method="post">
+                            <input type="hidden" name="platilloId" value="@item.PlatilloId" />
+                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"><strong>Total</strong></td>
+                <td><strong>₡@Model.Sum(i => i.Precio * i.Cantidad).ToString("N2")</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <a asp-controller="Restaurantes" asp-action="Index" class="btn btn-secondary">Seguir Comprando</a>
+}

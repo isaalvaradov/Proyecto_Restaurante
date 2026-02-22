@@ -19,6 +19,7 @@
         <th>Nombre</th>
         <th>Tipo de cocina</th>
         <th>Descripción</th>
+        <th>Platillos</th>
 
         @if (Context.Session.GetString("Rol") == "Administrador")
         {
@@ -32,6 +33,9 @@
             <td>@r.Nombre</td>
             <td>@r.TipoCocina</td>
             <td>@r.Descripcion</td>
+            <td>
+                <a asp-controller="Platillos" asp-action="Index" asp-route-restauranteId="@r.RestauranteId">Ver Platillos</a>
+            </td>
 
             @if (Context.Session.GetString("Rol") == "Administrador")
             {
