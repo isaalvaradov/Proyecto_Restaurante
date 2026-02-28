@@ -16,6 +16,7 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRestauranteService, RestauranteService>();
+builder.Services.AddScoped<IPlatilloService, PlatilloService>();
 
 
 var app = builder.Build();
