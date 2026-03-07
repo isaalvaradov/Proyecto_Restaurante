@@ -81,7 +81,6 @@ namespace Proyecto_Restaurante.Controllers
             return RedirectToAction("Login");
         }
 
-
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();

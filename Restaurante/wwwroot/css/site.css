@@ -1,31 +1,101 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: #f5f1e8;
+    margin-bottom: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+
+.container {
+    background-color: transparent;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+main {
+    background-color: transparent;
 }
+
+
+.navbar-custom {
+    background-color: #6f8f72 !important;
+}
+
+
+.navbar-collapse {
+    background-color: #6f8f72;
+}
+
+
+.text-title {
+    color: #fdf6e3 !important;
+    font-size: 1.4rem;
+}
+
+
+.navbar-nav .nav-link {
+    color: #fdf6e3 !important;
+    font-weight: 500;
+    margin-right: 12px;
+}
+
+    .navbar-nav .nav-link:hover {
+        color: #e8f0e6 !important;
+    }
+
+
+.btn {
+    border-radius: 8px;
+    padding: 8px 16px;
+    transition: 0.2s;
+}
+
+    .btn:hover {
+        transform: scale(1.03);
+    }
+
+.btn-primary {
+    background-color: #6f8f72;
+    border-color: #6f8f72;
+}
+
+    .btn-primary:hover {
+        background-color: #5e7d62;
+        border-color: #5e7d62;
+    }
+
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+
+table {
+    background-color: #ffffff;
+    border-radius: 8px;
+}
+
+
+.footer {
+    background-color: #6f8f72 !important;
+    color: #fdf6e3 !important;
+    text-align: center;
+    padding: 15px;
+}
+
+    .footer a {
+        color: #fdf6e3 !important;
+        text-decoration: none;
+    }
+
+        .footer a:hover {
+            color: #e8f0e6 !important;
+        }

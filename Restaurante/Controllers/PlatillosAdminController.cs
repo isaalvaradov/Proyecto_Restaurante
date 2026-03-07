@@ -53,6 +53,18 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
+        public IActionResult Details(int id)
+        {
+            var platillo = _service.ObtenerPorId(id);
+
+            if (platillo == null)
+            {
+                return NotFound();
+            }
+
+            return View(platillo);
+        }
+
         public IActionResult Delete(int id)
         {
             var platillo = _service.ObtenerPorId(id);
