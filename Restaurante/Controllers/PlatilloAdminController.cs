@@ -19,14 +19,14 @@ namespace Proyecto_Restaurante.Controllers
             _context = context;
         }
 
-        // GET: PlatilloAdmin
+    
         public async Task<IActionResult> Index()
         {
             var restauranteDbContext = _context.Platillos.Include(p => p.Restaurante);
             return View(await restauranteDbContext.ToListAsync());
         }
 
-        // GET: PlatilloAdmin/Details/5
+    
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,16 +45,14 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
-        // GET: PlatilloAdmin/Create
+      
         public IActionResult Create()
         {
             ViewData["RestauranteId"] = new SelectList(_context.Restaurantes, "RestauranteId", "RestauranteId");
             return View();
         }
 
-        // POST: PlatilloAdmin/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PlatilloId,Nombre,Descripcion,Precio,ImagenUrl,RestauranteId")] Platillo platillo)
@@ -69,7 +67,7 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
-        // GET: PlatilloAdmin/Edit/5
+    
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,9 +84,7 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
-        // POST: PlatilloAdmin/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PlatilloId,Nombre,Descripcion,Precio,ImagenUrl,RestauranteId")] Platillo platillo)
@@ -122,7 +118,7 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
-        // GET: PlatilloAdmin/Delete/5
+  
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,7 +137,6 @@ namespace Proyecto_Restaurante.Controllers
             return View(platillo);
         }
 
-        // POST: PlatilloAdmin/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
