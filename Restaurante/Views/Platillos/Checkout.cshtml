@@ -1,0 +1,41 @@
+@model List<Proyecto_Restaurante.Models.CarritoItem>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resumen de compra</h2>
+
+@if (TempData["StripeError"] != null)
+{
+    <div class="alert alert-danger">@TempData["StripeError"]</div>
+}
+
+@* Email test UI removed. *@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>@item.Nombre</td>
+            <td>@item.Cantidad</td>
+            <td>@item.Precio.ToString("C")</td>
+            <td>@(item.Precio * item.Cantidad).ToString("C")</td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<form method="post" asp-action="CreateStripeSession" style="display:inline-block; margin-left:0;">
+    <button type="submit" class="btn btn-success">Pagar con tarjeta (Stripe)</button>
+</form>
+
+<p><a asp-action="Carrito">Volver al carrito</a></p>
