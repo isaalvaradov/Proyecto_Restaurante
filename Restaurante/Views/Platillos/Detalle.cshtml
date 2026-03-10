@@ -1,0 +1,35 @@
+@model Proyecto_Restaurante.Models.Platillo
+
+@{
+    ViewData["Title"] = "Detalle del Platillo";
+}
+
+<h2>@Model.Nombre</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @if (!string.IsNullOrEmpty(Model.ImagenUrl))
+        {
+            <img src="@Model.ImagenUrl" alt="@Model.Nombre" class="img-fluid rounded" style="max-height:400px; object-fit:cover; width:100%;" />
+        }
+    </div>
+    <div class="col-md-6">
+        <h4>Descripción</h4>
+        <p>@Model.Descripcion</p>
+
+        <h4>Precio</h4>
+        <p class="fs-4 fw-bold">₡@Model.Precio.ToString("N2")</p>
+
+        <h4>Restaurante</h4>
+        <p>@Model.Restaurante?.Nombre</p>
+
+        <form asp-action="AgregarAlCarrito" method="post">
+            <input type="hidden" name="platilloId" value="@Model.PlatilloId" />
+            <input type="hidden" name="restauranteId" value="@Model.RestauranteId" />
+            <button type="submit" class="btn btn-success">Agregar al carrito</button>
+        </form>
+
+        <br />
+        <a asp-action="Index" asp-route-restauranteId="@Model.RestauranteId" class="btn btn-secondary">Volver</a>
+    </div>
+</div>

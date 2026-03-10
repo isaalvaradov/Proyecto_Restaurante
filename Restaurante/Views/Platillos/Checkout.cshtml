@@ -1,0 +1,49 @@
+@model List<Proyecto_Restaurante.Models.CarritoItem>
+
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Resumen de compra</h2>
+
+@if (!Model.Any())
+{
+    <p>El carrito está vacío.</p>
+    <a asp-controller="Restaurantes" asp-action="Index" class="btn btn-primary">Ver Restaurantes</a>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Cantidad</td>
+                    <td>₡@item.Precio.ToString("N2")</td>
+                    <td>₡@((item.Precio * item.Cantidad).ToString("N2"))</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-end"><strong>Total</strong></td>
+                <td><strong>₡@Model.Sum(i => i.Precio * i.Cantidad).ToString("N2")</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <form asp-action="CreateStripeSession" method="post">
+        @Html.AntiForgeryToken()
+        <button type="submit" class="btn btn-primary">Pagar con tarjeta (Stripe)</button>
+        <a asp-action="Carrito" class="btn btn-secondary ms-2">Volver al carrito</a>
+    </form>
+}

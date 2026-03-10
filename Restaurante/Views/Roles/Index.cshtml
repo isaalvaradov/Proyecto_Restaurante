@@ -1,0 +1,30 @@
+﻿@model List<Proyecto_Restaurante.Models.Usuario>
+
+<h2>Mantenimiento de Roles</h2>
+
+<table border="1" cellpadding="5">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Rol</th>
+            <th>Acción</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var usuario in Model)
+        {
+            <tr>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.Correo</td>
+                <td>@usuario.Rol</td>
+                <td>
+                    <form asp-action="CambiarRol" method="post">
+                        <input type="hidden" name="id" value="@usuario.UsuarioId" />
+                        <button type="submit">Cambiar rol</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,39 @@
+@model List<Proyecto_Restaurante.Models.Platillo>
+
+@{
+    ViewData["Title"] = "Platillos";
+    var restaurante = ViewBag.Restaurante as Proyecto_Restaurante.Models.Restaurante;
+}
+
+<h2>Platillos de @restaurante?.Nombre</h2>
+
+<a asp-controller="Platillos" asp-action="Carrito" class="btn btn-outline-secondary mb-3">🛒 Ver Carrito</a>
+
+<br /><br />
+
+<div class="row">
+    @foreach (var platillo in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                @if (!string.IsNullOrEmpty(platillo.ImagenUrl))
+                {
+                    <img src="@platillo.ImagenUrl" class="card-img-top" alt="@platillo.Nombre" style="height:200px; object-fit:cover;" />
+                }
+                <div class="card-body">
+                    <h5 class="card-title">@platillo.Nombre</h5>
+                    <p class="card-text">@platillo.Descripcion</p>
+                    <p class="card-text"><strong>₡@platillo.Precio.ToString("N2")</strong></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a asp-action="Detalle" asp-route-id="@platillo.PlatilloId" class="btn btn-info btn-sm">Ver Detalle</a>
+                    <form asp-action="AgregarAlCarrito" method="post">
+                        <input type="hidden" name="platilloId" value="@platillo.PlatilloId" />
+                        <input type="hidden" name="restauranteId" value="@restaurante.RestauranteId" />
+                        <button type="submit" class="btn btn-success btn-sm">Agregar al carrito</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

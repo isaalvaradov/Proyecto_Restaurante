@@ -1,0 +1,25 @@
+﻿@model Proyecto_Restaurante.Models.Restaurante
+
+<h2>Editar Restaurante</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="RestauranteId" />
+
+    <div>
+        <label>Nombre</label>
+        <input asp-for="Nombre" />
+    </div>
+
+    <div>
+        <label>Tipo de cocina</label>
+        <input asp-for="TipoCocina" />
+    </div>
+
+    <div>
+        <label>Descripción</label>
+        <input asp-for="Descripcion" />
+    </div>
+
+    <button type="submit">Guardar</button>
+    <a asp-action="Index">Cancelar</a>
+</form>

@@ -1,0 +1,19 @@
+﻿@model Proyecto_Restaurante.Models.Restaurante
+
+<h2>Nuevo Restaurante</h2>
+
+<form asp-action="Create" method="post">
+    <div>
+        <input asp-for="Nombre" placeholder="Nombre" />
+    </div>
+
+    <div>
+        <input asp-for="TipoCocina" placeholder="Tipo de cocina" />
+    </div>
+
+    <div>
+        <input asp-for="Descripcion" placeholder="Descripción" />
+    </div>
+
+    <button type="submit">Guardar</button>
+</form>
