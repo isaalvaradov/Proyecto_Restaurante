@@ -11,6 +11,7 @@ namespace Proyecto_Restaurante.Data
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Restaurante> Restaurantes { get; set; }
         public DbSet<Platillo> Platillos { get; set; }
+        public DbSet<Orden> Ordenes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
