@@ -5,6 +5,8 @@ using Proyecto_Restaurante.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// 🔥 AGREGADO
+builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<RestauranteDbContext>(options =>
@@ -14,10 +16,10 @@ builder.Services.AddDbContext<RestauranteDbContext>(options =>
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRestauranteService, RestauranteService>();
 builder.Services.AddScoped<IPlatilloService, PlatilloService>();
-
 
 var app = builder.Build();
 
@@ -35,6 +37,9 @@ app.UseRouting();
 app.UseSession();
 
 app.UseAuthorization();
+
+// 🔥 ESTO ES LO QUE TE FALTABA
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
