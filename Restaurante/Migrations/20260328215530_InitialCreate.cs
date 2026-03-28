@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -7,11 +8,26 @@
 namespace Proyecto_Restaurante.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedData : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Ordenes",
+                columns: table => new
+                {
+                    OrdenId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FechaCompra = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CompradorCorreo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Total = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ordenes", x => x.OrdenId);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Restaurantes",
                 columns: table => new
@@ -41,6 +57,28 @@ namespace Proyecto_Restaurante.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Usuarios", x => x.UsuarioId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrdenItem",
+                columns: table => new
+                {
+                    OrdenItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PlatilloId = table.Column<int>(type: "int", nullable: false),
+                    Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Precio = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Cantidad = table.Column<int>(type: "int", nullable: false),
+                    OrdenId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrdenItem", x => x.OrdenItemId);
+                    table.ForeignKey(
+                        name: "FK_OrdenItem_Ordenes_OrdenId",
+                        column: x => x.OrdenId,
+                        principalTable: "Ordenes",
+                        principalColumn: "OrdenId");
                 });
 
             migrationBuilder.CreateTable(
@@ -93,6 +131,11 @@ namespace Proyecto_Restaurante.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_OrdenItem_OrdenId",
+                table: "OrdenItem",
+                column: "OrdenId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Platillos_RestauranteId",
                 table: "Platillos",
                 column: "RestauranteId");
@@ -102,10 +145,16 @@ namespace Proyecto_Restaurante.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "OrdenItem");
+
+            migrationBuilder.DropTable(
                 name: "Platillos");
 
             migrationBuilder.DropTable(
                 name: "Usuarios");
+
+            migrationBuilder.DropTable(
+                name: "Ordenes");
 
             migrationBuilder.DropTable(
                 name: "Restaurantes");
