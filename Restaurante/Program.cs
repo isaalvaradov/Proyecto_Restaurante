@@ -5,7 +5,7 @@ using Proyecto_Restaurante.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 🔥 AGREGADO
+
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 
@@ -29,7 +29,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -38,7 +38,7 @@ app.UseSession();
 
 app.UseAuthorization();
 
-// 🔥 ESTO ES LO QUE TE FALTABA
+
 app.MapControllers();
 
 app.MapControllerRoute(
