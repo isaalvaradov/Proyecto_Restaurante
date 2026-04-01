@@ -5,23 +5,34 @@ using Proyecto_Restaurante.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
 
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<RestauranteDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    sql => sql.EnableRetryOnFailure()
+    options.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sql => sql.EnableRetryOnFailure()
     ));
+
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRestauranteService, RestauranteService>();
 builder.Services.AddScoped<IPlatilloService, PlatilloService>();
 
 var app = builder.Build();
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 if (!app.Environment.IsDevelopment())
 {
@@ -30,6 +41,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 //app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -37,7 +49,6 @@ app.UseRouting();
 app.UseSession();
 
 app.UseAuthorization();
-
 
 app.MapControllers();
 
