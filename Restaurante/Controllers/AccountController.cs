@@ -81,6 +81,16 @@ namespace Proyecto_Restaurante.Controllers
             return RedirectToAction("Login");
         }
 
+        [HttpPost]
+        public IActionResult ValidarAdmin(string nombre, string correo)
+        {
+            if (nombre == "Admin" && correo == "admin@gmail.com")
+            {
+                return Ok("Administrador válido ✅");
+            }
+
+            return BadRequest("No es administrador ❌");
+        }
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
